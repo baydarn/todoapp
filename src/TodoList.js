@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from "prop-types";
 import Todo from './Todo';
 
 
@@ -24,5 +25,13 @@ class TodoList extends React.Component{
         );
     }
 }
+
+TodoList.propTypes = {
+  title: PropTypes.string
+};
+
+TodoList.defaultProps = {
+    title: "Başlık"
+};
 
 export default TodoList;

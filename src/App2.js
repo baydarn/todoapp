@@ -5,7 +5,7 @@ import RemoveAll from "./RemoveAll";
 import "./App.scss";
 import Filters from "./Filters";
 import {connect} from "react-redux";
-import {setFilter, setTodos, addTodo, showNotification, hideNotification} from "./actionCreators/actionCreaters";
+import {setFilter, setTodos, addTodo} from "./actionCreators/actionCreaters";
 
 
 class App extends Component {
@@ -79,25 +79,19 @@ class App extends Component {
   }
 
   render(){
-      console.log("App props", this.props);
     return (
         <div className="App" id="todo">
-            {
-                this.props.notificationVisibility &&  <div style={{"background": "black", "color": "white", "padding": "15px", "fontSize": "20px"}}>
-                    {this.props.notificationText}
-                </div>
-            }
             <div className="todo-list todo-list-add">
                 <h3>Todo Ekle / Sil</h3>
                 <div>
-                    <AddTodo   onTodoAdd={this.addTodo} />
-                    <RemoveAll onRemoveAll={this.removeAllTodos}/>
+                    <AddTodo />
+                    <RemoveAll />
                     <Filters />
                 </div>
             </div>
             <TodoList
-                todos={this.filterTodos(this.props.todos, this.props.activeFilter)}
-                onCheckedToggle={this.toggleCompleteStatus} />
+todos={this.filterTodos(this.props.todos, this.props.activeFilter)}
+            />
         </div>
     );
   }
@@ -105,14 +99,12 @@ class App extends Component {
 
 const mapStateToProps = (state) => ({
   activeFilter: state.activeFilter,
-  todos: state.todos,
-  notificationVisibility: state.notificationVisibility,
-  notificationText: state.notificationText
+  todos: state.todos
 });
 
 const mapDispatchToProps = dispatch => ({
     addTodos: (todos) => {dispatch(setTodos(todos))},
-    addTodo: (todo) => {dispatch(addTodo(todo))},
+    addTodo: (todo) => {dispatch(addTodo(todo))}
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
